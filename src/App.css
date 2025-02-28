@@ -1,0 +1,279 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background: linear-gradient(135deg, #4a68d9, #3c50af);
+  min-height: 100vh;
+  color: #333;
+  overflow-x: hidden;
+  /* Disable scrolling to prevent movement */
+  overflow-y: hidden;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  position: relative;
+}
+
+.game-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  max-width: 700px;
+  width: 90%;
+  /* Remove absolute positioning */
+  position: relative;
+  /* Center content */
+  margin: 0 auto;
+  /* Add margin bottom to make space for footer */
+  margin-bottom: 50px;
+}
+
+.title {
+  text-align: center;
+  color: #4a68d9;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+@media (min-width: 768px) {
+  .game {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.board {
+  background: #e9ecff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(74, 104, 217, 0.2);
+}
+
+.board-row {
+  display: flex;
+}
+
+.square {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border: 2px solid #d1d8ff;
+  margin: 4px;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 8px;
+}
+
+.square:hover {
+  background: #f2f5ff;
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(74, 104, 217, 0.2);
+}
+
+.square-x {
+  color: #5d78e2;
+}
+
+.square-o {
+  color: #f87171;
+}
+
+.status {
+  margin-top: 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 15px;
+  background: #e9ecff;
+  color: #3c50af;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 250px;
+}
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.control-button {
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.control-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.restart-button {
+  background: #e74c3c;
+}
+
+.restart-button:hover {
+  background: #c0392b;
+}
+
+.history-button {
+  background: #3498db;
+}
+
+.history-button:hover {
+  background: #2980b9;
+}
+
+.start-button {
+  background: #9b59b6;
+}
+
+.start-button:hover {
+  background: #8e44ad;
+}
+
+/* The key fix - make move history container have a fixed visible state */
+.move-history-container {
+  /* Fixed height and opacity with !important to ensure it doesn't change */
+  height: 200px !important;
+  width: 100% !important;
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Instead of hiding the container, we hide only the internal content */
+.move-history-hidden {
+  visibility: hidden;
+}
+
+.move-history {
+  background: #e9ecff;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(74, 104, 217, 0.15);
+  height: 100%;
+}
+
+.move-history-title {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #3c50af;
+}
+
+.move-buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.move-button {
+  background: #7d94e8;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  min-width: 40px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.move-button:hover {
+  background: #6d86e5;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.active-move {
+  background: #f87171;
+  box-shadow: 0 2px 5px rgba(255, 71, 87, 0.3);
+}
+
+.active-move:hover {
+  background: #ef4444;
+  box-shadow: 0 3px 7px rgba(255, 71, 87, 0.4);
+}
+
+.footer {
+  color: white;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: -1rem;
+  transform: none !important;
+  transition: none !important;
+}
+
+.footer-link {
+  color: #ffeb3b;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.footer-link:hover {
+  color: #fff176;
+  text-decoration: underline;
+}
